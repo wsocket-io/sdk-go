@@ -1,4 +1,4 @@
-module github.com/wsocket/sdk-go
+module github.com/wsocket-io/sdk-go
 
 go 1.21
 

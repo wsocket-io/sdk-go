@@ -2,13 +2,13 @@
 
 Official Go SDK for [wSocket](https://wsocket.io) — Realtime Pub/Sub over WebSockets.
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/wsocket/sdk-go.svg)](https://pkg.go.dev/github.com/wsocket/sdk-go)
+[![Go Reference](https://pkg.go.dev/badge/github.com/wsocket-io/sdk-go.svg)](https://pkg.go.dev/github.com/wsocket-io/sdk-go)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ## Installation
 
 ```bash
-go get github.com/wsocket/sdk-go
+go get github.com/wsocket-io/sdk-go
 ```
 
 ## Quick Start
@@ -18,7 +18,7 @@ package main
 
 import (
     "fmt"
-    wsocket "github.com/wsocket/sdk-go"
+    wsocket "github.com/wsocket-io/sdk-go"
 )
 
 func main() {
