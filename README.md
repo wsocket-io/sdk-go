@@ -22,7 +22,7 @@ import (
 )
 
 func main() {
-    client := wsocket.NewClient("wss://your-server.com", "your-api-key")
+    client := wsocket.NewClient("wss://node00.wsocket.online", "your-api-key")
     err := client.Connect()
     if err != nil {
         panic(err)
