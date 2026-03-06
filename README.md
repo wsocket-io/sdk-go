@@ -3,6 +3,7 @@
 Official Go SDK for [wSocket](https://wsocket.io) — Realtime Pub/Sub over WebSockets.
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/wsocket-io/sdk-go.svg)](https://pkg.go.dev/github.com/wsocket-io/sdk-go)
+[![Go Version](https://img.shields.io/github/v/tag/wsocket-io/sdk-go?label=version&sort=semver)](https://github.com/wsocket-io/sdk-go/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ## Installation
