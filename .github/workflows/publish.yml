@@ -1,0 +1,23 @@
+name: Publish Go Module
+
+# Go modules are published automatically when you push a semver tag.
+# This workflow verifies the module is valid after tagging.
+on:
+  push:
+    tags: ['v*']
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+      - run: go build ./...
+      - run: go vet ./...
+      - run: go test ./... -v
+      - name: Verify module is available on proxy
+        run: |
+          sleep 30
+          GOPROXY=https://proxy.golang.org go list -m github.com/wsocket-io/sdk-go@${{ github.ref_name }} || echo "Module may take a few minutes to appear on proxy.golang.org"
