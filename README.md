@@ -78,6 +78,29 @@ ch.OnHistory(func(result wsocket.HistoryResult) {
 ch.History(wsocket.HistoryOptions{Limit: 50})
 ```
 
+## Push Notifications
+
+```go
+push := wsocket.NewPushClient("https://your-server.com", "your-api-key", "your-app-id")
+
+// Register device
+push.RegisterFCM("device-token", "user-123")
+
+// Send & broadcast
+push.SendToMember("user-123", map[string]string{"title": "Hello"})
+push.Broadcast(map[string]string{"title": "News"})
+
+// Channel targeting
+push.AddChannel("subscription-id", "alerts")
+push.RemoveChannel("subscription-id", "alerts")
+
+// VAPID key
+vapidKey, _ := push.GetVapidKey()
+
+// List subscriptions
+subs, _ := push.ListSubscriptions("user-123")
+```
+
 ## Requirements
 
 - Go >= 1.21
