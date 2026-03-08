@@ -777,6 +777,18 @@ func (p *PushClient) Unregister(memberID string, platform string) (int, error) {
 	return 0, nil
 }
 
+// DeleteSubscription removes a specific push subscription by its ID.
+func (p *PushClient) DeleteSubscription(subscriptionID string) (bool, error) {
+	res, err := p.apiRequest("DELETE", fmt.Sprintf("/api/admin/apps/%s/push/subscriptions/%s", p.AppID, subscriptionID), nil)
+	if err != nil {
+		return false, err
+	}
+	if deleted, ok := res["deleted"].(bool); ok {
+		return deleted, nil
+	}
+	return false, nil
+}
+
 // SendToMember sends a push notification to a specific member.
 func (p *PushClient) SendToMember(memberID string, payload PushPayload) (map[string]interface{}, error) {
 	body := map[string]interface{}{
