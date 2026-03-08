@@ -826,3 +826,49 @@ func (p *PushClient) Broadcast(payload PushPayload) (map[string]interface{}, err
 	}
 	return p.apiRequest("POST", fmt.Sprintf("/api/admin/apps/%s/push/send", p.AppID), body)
 }
+
+// AddChannel adds a channel to a member's push subscriptions.
+func (p *PushClient) AddChannel(memberID, channel string) (map[string]interface{}, error) {
+	return p.apiRequest("POST", "/api/push/channels/add", map[string]interface{}{
+		"memberId": memberID,
+		"channel":  channel,
+	})
+}
+
+// RemoveChannel removes a channel from a member's push subscriptions.
+func (p *PushClient) RemoveChannel(memberID, channel string) (map[string]interface{}, error) {
+	return p.apiRequest("POST", "/api/push/channels/remove", map[string]interface{}{
+		"memberId": memberID,
+		"channel":  channel,
+	})
+}
+
+// GetVapidKey returns the VAPID public key for this app.
+func (p *PushClient) GetVapidKey() (string, error) {
+	res, err := p.apiRequest("GET", "/api/push/vapid-key", nil)
+	if err != nil {
+		return "", err
+	}
+	if key, ok := res["vapidPublicKey"].(string); ok {
+		return key, nil
+	}
+	return "", nil
+}
+
+// ListSubscriptions lists push subscriptions with optional filters.
+func (p *PushClient) ListSubscriptions(memberID, platform string, limit int) (map[string]interface{}, error) {
+	params := ""
+	sep := "?"
+	if memberID != "" {
+		params += sep + "memberId=" + memberID
+		sep = "&"
+	}
+	if platform != "" {
+		params += sep + "platform=" + platform
+		sep = "&"
+	}
+	if limit > 0 {
+		params += sep + "limit=" + fmt.Sprintf("%d", limit)
+	}
+	return p.apiRequest("GET", "/api/push/subscriptions"+params, nil)
+}
